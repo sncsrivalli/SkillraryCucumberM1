@@ -10,7 +10,7 @@ public class CourseListPage {
 	@FindBy(xpath = "//h1[normalize-space(text())='Course List']")
 	private WebElement pageHeader;
 
-	@FindBy(xpath = "//a[text()=' New']")
+	@FindBy(xpath = "//a[@id='addproduct' and text()=' New']")
 	private WebElement newButton;
 
 	@FindBy(xpath = "//table/tbody/tr[last()]/td[1]")

@@ -9,7 +9,7 @@ import genericLibraries.WebDriverUtility;
 
 public class AddNewCoursePage {
 	
-	@FindBy(xpath = "//h4[.='Add New Course']")
+	@FindBy(xpath = "//h4/b[.='Add New Course']")
 	private WebElement pageHeader;
 	
 	@FindBy(xpath = "//input[@id='name']")
@@ -24,7 +24,7 @@ public class AddNewCoursePage {
 	@FindBy(xpath = "(//input[@id='photo'])[2]")
 	private WebElement photoUploadButton;
 	
-	@FindBy(xpath = "//iframe[@title='Rich Text Editor, editor1']")
+	@FindBy(xpath = "//html/body/p")
 	private WebElement descriptionFrame;
 	
 	@FindBy(xpath = "//button[@name='add']")
@@ -55,7 +55,7 @@ public class AddNewCoursePage {
 	}
 	
 	public void setDescription(WebDriverUtility web, String description) {
-		web.switchToFrame(descriptionFrame);
+		web.switchToFrame(0);
 		descriptionFrame.sendKeys(description);
 		web.switchBackFromFrame();
 	}

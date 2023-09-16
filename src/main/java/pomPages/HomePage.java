@@ -16,7 +16,7 @@ public class HomePage {
 	@FindBy(xpath = "//span[text()='Courses']")
 	private WebElement coursesLink;
 	
-	@FindBy(xpath = "//a[text()=' Course List']")
+	@FindBy(xpath = "//ul/li/a[.=' Course List']")
 	private WebElement courseListLink;
 	
 	@FindBy(xpath = "//a[text()=' Category']")
