@@ -35,7 +35,6 @@ Feature: Admin Module
       | Srivalli                                                                             |
       | SNC                                                                                  |
       | Hyderabad                                                                            |
-      |                                                                           9876543210 |
       | C:\\Users\\TRACK QJSPIDERS\\Downloads\\WhatsApp Image 2023-08-04 at 12.26.24 PM.jpeg |
     And saves it
     Then New User should be added to Users list

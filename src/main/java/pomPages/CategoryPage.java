@@ -1,5 +1,7 @@
 package pomPages;
 
+import java.util.List;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -13,11 +15,11 @@ public class CategoryPage {
 	@FindBy(xpath = "//a[text()=' New']")
 	private WebElement newButton;
 	
-	@FindBy(xpath = "//ul[@class='pagination']/li[last()-1]/a")
-	private WebElement lastCategoryListPageLink;
+	@FindBy(xpath = "//ul[@class='pagination']/li/a[text()='Next']")
+	private WebElement nextPageButton;
 	
-	@FindBy(xpath = "//table/tbody/tr[last()]/td[1]")
-	private WebElement categoryName;
+	@FindBy(xpath = "//table/tbody/tr/td[1]")
+	private List<WebElement> categoryNames;
 	
 	@FindBy(xpath = "//table/tbody/tr[last()]/descendant::button[text()=' Delete']")
 	private WebElement deleteButton;
@@ -37,12 +39,16 @@ public class CategoryPage {
 		newButton.click();
 	}
 	
-	public void clickUsersListLastPageLink() {
-		lastCategoryListPageLink.click();
+	public WebElement getNextPageButton() {
+		return nextPageButton;
 	}
 	
-	public String getUserName() {
-		return categoryName.getText();
+	public void clickCategoryListNextPageLink() {
+		nextPageButton.click();
+	}
+	
+	public List<WebElement> getCategoryNamesList() {
+		return categoryNames;
 	}
 	
 	public void clickDeleteButton() {

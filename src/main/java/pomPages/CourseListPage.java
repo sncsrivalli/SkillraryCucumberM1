@@ -1,5 +1,7 @@
 package pomPages;
 
+import java.util.List;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -13,8 +15,8 @@ public class CourseListPage {
 	@FindBy(xpath = "//a[@id='addproduct' and text()=' New']")
 	private WebElement newButton;
 
-	@FindBy(xpath = "//table/tbody/tr[last()]/td[1]")
-	private WebElement courseName;
+	@FindBy(xpath = "//table/tbody/tr/td[@class='sorting_1']")
+	private List<WebElement> courseNameList;
 
 	@FindBy(xpath = "//ul[@class='pagination']/li[last()-1]/a")
 	private WebElement lastCourseListPageLink;
@@ -24,6 +26,9 @@ public class CourseListPage {
 
 	@FindBy(name = "delete")
 	private WebElement dialogDeleteButton;
+	
+	@FindBy(xpath = "//div[contains(@class,'alert')]")
+	private WebElement deleteSuccessAlert;
 	
 	public CourseListPage(WebDriver driver) {
 		PageFactory.initElements(driver, this);
@@ -37,12 +42,12 @@ public class CourseListPage {
 		newButton.click();
 	}
 	
-	public void clickUsersListLastPageLink() {
+	public void clickCourseListLastPageLink() {
 		lastCourseListPageLink.click();
 	}
 	
-	public String getUserName() {
-		return courseName.getText();
+	public List<WebElement> getCourseNameList() {
+		return courseNameList;
 	}
 	
 	public void clickDeleteButton() {
@@ -51,5 +56,9 @@ public class CourseListPage {
 	
 	public void clickDialogDeleteButton() {
 		dialogDeleteButton.click();
+	}
+	
+	public String getDeleteSuccessMessage() {
+		return deleteSuccessAlert.getText();
 	}
 }

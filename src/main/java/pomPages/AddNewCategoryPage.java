@@ -7,7 +7,7 @@ import org.openqa.selenium.support.PageFactory;
 
 public class AddNewCategoryPage {
 
-	@FindBy(xpath = "//h4[.='Add New Course']")
+	@FindBy(xpath = "//h4[.='Add New Category']")
 	private WebElement pageHeader;
 	
 	@FindBy(xpath = "//input[@id='name']")
