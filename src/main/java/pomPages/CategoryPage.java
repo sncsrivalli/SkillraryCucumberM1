@@ -7,8 +7,11 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class CategoryPage {
+import genericLibraries.WebDriverUtility;
 
+public class CategoryPage {
+	private String deleteButtonPath = "//td[text()='%s']/following-sibling::td/button[text()=' Delete']";
+	
 	@FindBy(xpath = "//h1[normalize-space(text())='Category']")
 	private WebElement pageHeader;
 	
@@ -21,9 +24,6 @@ public class CategoryPage {
 	@FindBy(xpath = "//table/tbody/tr/td[1]")
 	private List<WebElement> categoryNames;
 	
-	@FindBy(xpath = "//table/tbody/tr[last()]/descendant::button[text()=' Delete']")
-	private WebElement deleteButton;
-
 	@FindBy(name = "delete")
 	private WebElement dialogDeleteButton;
 	
@@ -51,8 +51,8 @@ public class CategoryPage {
 		return categoryNames;
 	}
 	
-	public void clickDeleteButton() {
-		deleteButton.click();
+	public void clickDeleteButton(WebDriverUtility web, String categoryName) {
+		web.convertStringToDynamicXpath(deleteButtonPath, categoryName).click();
 	}
 	
 	public void clickDialogDeleteButton() {

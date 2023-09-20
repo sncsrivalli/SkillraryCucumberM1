@@ -27,7 +27,6 @@ import pomPages.UsersPage;
 import pomPages.WelcomePage;
 
 public class AdminSteps {
-	// private ExcelUtility excel;
 	private PropertiesUtility property;
 	private WebDriverUtility webUtil;
 	JavaUtility jutil;
@@ -43,6 +42,7 @@ public class AdminSteps {
 	AddNewCoursePage addCourse;
 	String courseName;
 	String nameOfCategory;
+	String userName;
 
 	@Before(order = 1)
 	public void configuration_set_up() {
@@ -180,37 +180,59 @@ public class AdminSteps {
 
 	@When("User deletes the new category")
 	public void user_deletes_the_new_category() {
-		// Write code here that turns the phrase above into concrete actions
-		throw new io.cucumber.java.PendingException();
+		while (true) {
+			boolean status = false;
+			List<WebElement> categoryNamesList = category.getCategoryNamesList();
+			for (WebElement name : categoryNamesList) {
+				if (name.getText().equals(nameOfCategory)) {
+					status = true;
+					category.clickDeleteButton(webUtil, nameOfCategory);
+					break;
+				}
+			}
+			if (category.getNextPageButton().isEnabled() && status==false)
+				category.clickCategoryListNextPageLink();
+			else
+				break;
+		}
+		category.clickDialogDeleteButton();
 	}
 
 	@Given("User clicks on Users")
 	public void user_clicks_on_users() {
-		// Write code here that turns the phrase above into concrete actions
-		throw new io.cucumber.java.PendingException();
+		home.clickUsersLink();
+		Assert.assertTrue(users.getPageHeader().contains("Users"));
 	}
 
 	@When("User clicks on New and enters new user details")
-	public void user_clicks_on_new_and_enters_new_user_details() {
-		// Write code here that turns the phrase above into concrete actions
-		throw new io.cucumber.java.PendingException();
+	public void user_clicks_on_new_and_enters_new_user_details(List<String> details) throws InterruptedException {
+		users.clickNewButton();
+		Thread.sleep(2000);
+		Assert.assertEquals(addUser.getPageHeader(), "Add New User");
+		userName = details.get(2);
+		
+		addUser.setEmailTF(details.get(0));
+		addUser.setPasswordTF(details.get(1));
+		addUser.setFirstNameTF(userName);
+		addUser.setLastNameTF(details.get(3));
+		addUser.setAddress(details.get(4));
+		addUser.setContactInfo(details.get(5));
+		addUser.setPhotoFilePath(details.get(6));
 	}
 
 	@Then("New User should be added to Users list")
 	public void it_should_be_added_to_users_list() {
-		// Write code here that turns the phrase above into concrete actions
-		throw new io.cucumber.java.PendingException();
+		webUtil.takeScreenshot("users", jutil, driver);
+		Assert.fail();
 	}
 
 	@When("User deletes the new user")
 	public void user_deletes_the_new_user() {
-		// Write code here that turns the phrase above into concrete actions
-		throw new io.cucumber.java.PendingException();
+		driver.navigate().back();
 	}
 
 	@After
 	public void post_conditions() {
 		webUtil.quitAllWindows();
 	}
-
 }
