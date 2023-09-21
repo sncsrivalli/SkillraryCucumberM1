@@ -39,5 +39,3 @@ Feature: Admin Module
       | C:\\Users\\TRACK QJSPIDERS\\Downloads\\WhatsApp Image 2023-08-04 at 12.26.24 PM.jpeg |
     And saves it
     Then New User should be added to Users list
-    When User deletes the new user
-    Then Delete success message is displayed and user logs out

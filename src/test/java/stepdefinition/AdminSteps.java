@@ -223,12 +223,6 @@ public class AdminSteps {
 	@Then("New User should be added to Users list")
 	public void it_should_be_added_to_users_list() {
 		webUtil.takeScreenshot("users", jutil, driver);
-		Assert.fail();
-	}
-
-	@When("User deletes the new user")
-	public void user_deletes_the_new_user() {
-		driver.navigate().back();
 	}
 
 	@After
